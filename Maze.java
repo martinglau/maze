@@ -33,6 +33,7 @@ import java.util.*;
 public class Maze
 {
     private int rows, cols;
+    private int[][] maze;
 
     /**
      * Returns the width of the maze.
