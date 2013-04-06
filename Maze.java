@@ -33,7 +33,6 @@ import java.util.*;
 public class Maze
 {
     private int rows, cols;
-    
 
     /**
      * Returns the width of the maze.
@@ -79,7 +78,11 @@ public class Maze
      *                      <code>col &gt; = width</code>, or <code>row &gt;= height</code>
      */
     public boolean getRight(int row, int col) throws IndexOutOfBoundsException
-    {
+    {		if ((row => rows.length) ||(col => cols.length))
+    			throw IndexOutOfBoundsException;
+		walls = maze[row][col];
+		if (walls[0] == 1)
+			return true;
 		return false;
     }
 
