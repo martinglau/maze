@@ -175,9 +175,11 @@ public class Maze
 		{
 			for(int c = 0; c < cols; c++)
 			{
+					maze[r][c] = temp;
+					
 					if (r == rows - 1 && c == cols - 1)
 					{
-						maze[r][c] = temp;
+						maze[r][c] = [1,0];
 					}
 						
 			}
