@@ -33,7 +33,7 @@ import java.util.*;
 public class Maze
 {
     private int rows, cols;
-    private int[][] maze;
+    private int maze[][][];
 
     /**
      * Returns the width of the maze.
@@ -79,12 +79,23 @@ public class Maze
      *                      <code>col &gt; = width</code>, or <code>row &gt;= height</code>
      */
     public boolean getRight(int row, int col) throws IndexOutOfBoundsException
-    {		if ((row => rows.length) ||(col => cols.length))
-    			throw IndexOutOfBoundsException;
-		walls = maze[row][col];
-		if (walls[0] == 1)
-			return true;
-		return false;
+    {		try
+            {
+                if ((row <= rows) && (col <= cols))
+                {
+                	int[] walls;
+					walls = maze[row][col];
+					if (walls[0] == 1)
+						return true;
+					return false;
+				}
+            }
+            catch (IndexOutOfBoundsException e)
+            {
+                System.err.print("Error: row or column was out of bounds.");
+                return false;
+            }
+    	return false;
     }
 
     /**
@@ -171,23 +182,23 @@ public class Maze
 		title = String.format("rand(%dx%d)", rows, cols);
         this.rows = rows;
         this.cols = cols;
-		int[][] maze = new int[rows][cols];
-		int[] temp = new int[2];
-		temp[0] = 1;
-		temp[1] = 1;
+		int[][][] maze = new int[rows][cols][2];
 		for (int r = 0; r < rows; r++)
 		{
 			for(int c = 0; c < cols; c++)
 			{
-					maze[r][c] = temp;
 					
+					maze[r][c][0] = 1;
+					maze[r][c][1] = 1;
 					if (r == rows - 1 && c == cols - 1)
 					{
-						maze[r][c] = [1,0];
+						maze[r][c][0] = 0;
 					}
+					
 						
 			}
-		}
+		}			
+		
     }
     
 	
