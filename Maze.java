@@ -214,26 +214,26 @@ public class Maze
      */
     public Maze(int rows, int cols)
     {
-		title = String.format("rand(%dx%d)", rows, cols);
+	title = String.format("rand(%dx%d)", rows, cols);
         this.rows = rows;
         this.cols = cols;
-		int[][][] maze = new int[rows][cols][2];
+	int[][][] maze = new int[rows][cols][2];
 		for (int r = 0; r < rows; r++)
-		{
-			for(int c = 0; c < cols; c++)
 			{
-					
+				for(int c = 0; c < cols; c++)
+				{
 					maze[r][c][0] = 1;
 					maze[r][c][1] = 1;
 					if (r == rows - 1 && c == cols - 1)
-					{
-						maze[r][c][0] = 0;
-					}
+						{
+							maze[r][c][0] = 0;
+						}
 					
 						
-			}
-		}			
-		
+				}
+			}			
+	//This is where we need to write the code that generates the random maze via walls
+	//It would working by getRight & getBot then based on those results, it would setRight/setBot
     }
     
 	
