@@ -234,6 +234,25 @@ public class Maze
 			}			
 	//This is where we need to write the code that generates the random maze via walls
 	//It would working by getRight & getBot then based on those results, it would setRight/setBot
+	Disjoinsets d = new Disjoinsets[(rows - 1) * (cols - 1)]; //specific row * col refers to its singleton
+	Random rr = new Random();
+	Random rc = new Random();
+	int[] walls = new int[2];
+	int[] wallsr = new int[2];
+	int[] wallsb = new int[2];
+	while (d.count() > 1) //when d.count = 1, maze is connected
+		{
+			int row = rr.nextInt(rows - 1);
+			int col = rc.nextInt(col - 1);
+			walls[] = maze[row][col];
+			wallsr[] = maze[row][col + 1];
+			wallsb[] = maze[row + 1][col];
+			if walls[0] = 0
+				d.union((row*col), (row*(col+1)));
+			if walls[1] = 0
+				d.union((row*col), ((row + 1) * col);
+			//Compare and remove 
+		}
     }
     
 	
