@@ -79,7 +79,8 @@ public class Maze
      *                      <code>col &gt; = width</code>, or <code>row &gt;= height</code>
      */
     public boolean getRight(int row, int col) throws IndexOutOfBoundsException
-    {		try
+    {	
+    	try
             {
                 if ((row <= rows) && (col <= cols))
                 {
@@ -90,7 +91,7 @@ public class Maze
 					return false;
 				}
             }
-            catch (IndexOutOfBoundsException e)
+        catch (IndexOutOfBoundsException e)
             {
                 System.err.print("Error: row or column was out of bounds.");
                 return false;
@@ -113,7 +114,23 @@ public class Maze
      */
     public boolean getBot(int row, int col) throws IndexOutOfBoundsException
     {
-        return false;
+        try
+            {
+                if ((row <= rows) && (col <= cols))
+                {
+                	int[] walls;
+					walls = maze[row][col];
+					if (walls[1] == 1)
+						return true;
+					return false;
+				}
+            }
+        catch (IndexOutOfBoundsException e)
+            {
+                System.err.print("Error: row or column was out of bounds.");
+                return false;
+            }
+    	return false;
     }
 	
 	/**
