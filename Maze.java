@@ -247,11 +247,11 @@ public class Maze
 			walls[] = maze[row][col];
 			wallsr[] = maze[row][col + 1];
 			wallsb[] = maze[row + 1][col];
+			//Check if cells on both sides are disconnected
 			if walls[0] = 0
 				d.union((row*col), (row*(col+1)));
 			if walls[1] = 0
 				d.union((row*col), ((row + 1) * col);
-			//Compare and remove 
 		}
     }
     
