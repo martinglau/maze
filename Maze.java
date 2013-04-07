@@ -80,23 +80,21 @@ public class Maze
      */
     public boolean getRight(int row, int col) throws IndexOutOfBoundsException
     {	
+    	int[] walls;
+    	
     	try
             {
-                if ((row <= rows) && (col <= cols))
-                {
-                	int[] walls;
-					walls = maze[row][col];
-					if (walls[0] == 1)
-						return true;
-					return false;
-				}
+                walls = maze[row][col];
             }
         catch (IndexOutOfBoundsException e)
             {
                 System.err.print("Error: row or column was out of bounds.");
                 return false;
             }
-    	return false;
+            
+        if (walls[0] == 1)
+		return true;
+	return false;
     }
 
     /**
@@ -114,23 +112,21 @@ public class Maze
      */
     public boolean getBot(int row, int col) throws IndexOutOfBoundsException
     {
-        try
+        int[] walls;
+    	
+    	try
             {
-                if ((row <= rows) && (col <= cols))
-                {
-                	int[] walls;
-					walls = maze[row][col];
-					if (walls[1] == 1)
-						return true;
-					return false;
-				}
+                walls = maze[row][col];
             }
         catch (IndexOutOfBoundsException e)
             {
                 System.err.print("Error: row or column was out of bounds.");
                 return false;
             }
-    	return false;
+            
+        if (walls[1] == 1)
+		return true;
+	return false;
     }
 	
 	/**
@@ -147,7 +143,7 @@ public class Maze
      */
     public void setRight(int row, int col, boolean b) throws IndexOutOfBoundsException
     {
-
+	
     }
     
     /**
