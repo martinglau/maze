@@ -217,16 +217,13 @@ public class Maze
 		title = String.format("rand(%dx%d)", rows, cols);
         this.rows = rows;
         this.cols = cols;
-		int[][][] maze = new int[rows][cols][3];
-		int count = 0;
+		int[][][] maze = new int[rows][cols][2];
 		for (int r = 0; r < rows; r++)
 		{
 			for(int c = 0; c < cols; c++)
 			{
 				maze[r][c][0] = 1;
 				maze[r][c][1] = 1;
-				maze[r][c][2] = count;
-				count++;
 				if (r == rows - 1 && c == cols - 1)
 					{
 						maze[r][c][0] = 0;
@@ -239,10 +236,7 @@ public class Maze
 		DisjoinSets d = new DisjoinSets[rows * cols +1]; //specific row * col refers to its singleton
 		d.union(0,1);
 		Random randomd = new Random();
-		//Random rc = new Random();
 		int[] walls = new int[2];
-		int[] wallsr = new int[2];
-		int[] wallsb = new int[2];
 		while (d.count() > 1) //when d.count = 1, maze is connected
 		{
 			int randomd = randomd.nextInt(d.size());
@@ -259,10 +253,7 @@ public class Maze
 				walls = maze[(randomd/cols)-1][cols-1];
 				
 			}
-			//int col = rc.nextInt(col - 1);
 			walls[] = maze[row][col];
-			wallsr[] = maze[row][col + 1];
-			wallsb[] = maze[row + 1][col];
 			//Check if cells on both sides are disconnected
 			if walls[0] = 0
 				d.union((row*col), (row*(col+1)));
@@ -301,7 +292,6 @@ public class Maze
 			walls[1] = 0;
 			
 		}
-		//return walls;
     }
 	
     /**
