@@ -246,9 +246,9 @@ public class Maze
 		while (d.count() > 1) //when d.count = 1, maze is connected
 		{
 			int randomd = randomd.nextInt(d.size());
-			if (randomd != 0 && randomd % cols == 0)
+			if (randomd != 0 && randomd % cols == 0) //the right columns 
 			{
-				maze[(randomd/cols)-1][cols-1][cols] 
+				maze[(randomd/cols)-1][cols-1]
 			}
 			//int col = rc.nextInt(col - 1);
 			walls[] = maze[row][col];
