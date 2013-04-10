@@ -141,7 +141,7 @@ public class Maze
      */
     public void setRight(int row, int col, boolean b) throws IndexOutOfBoundsException
     {
-		int[] walls = new int[2];
+	int[] walls = new int[2];
     	try
         {
         	walls = maze[row][col];
@@ -172,13 +172,13 @@ public class Maze
     {
     	int[] walls = new int[2];
     	try
-            {
+        {
                 walls = maze[row][col];
-            }
+        }
         catch (IndexOutOfBoundsException e)
-            {
+        {
                 System.err.print("Error: row or column was out of bounds.");
-            }
+        }
         if (b)
         	walls[0] = 1;
         else
@@ -236,7 +236,8 @@ public class Maze
 		}			
 		//This is where we need to write the code that generates the random maze via walls
 		//It would working by getRight & getBot then based on those results, it would setRight/setBot
-		Disjoinsets d = new Disjoinsets[rows * cols - 1]; //specific row * col refers to its singleton
+		Disjoinsets d = new Disjoinsets[rows * cols +1]; //specific row * col refers to its singleton
+		d.union(0,1);
 		Random randomd = new Random();
 		//Random rc = new Random();
 		int[] walls = new int[2];
@@ -245,9 +246,9 @@ public class Maze
 		while (d.count() > 1) //when d.count = 1, maze is connected
 		{
 			int randomd = randomd.nextInt(d.size());
-			if (randomd % cols == 0)
+			if (randomd != 0 && randomd % cols == 0)
 			{
-				maze[randomd/cols][cols]
+				maze[(randomd/cols)-1][cols-1][cols] 
 			}
 			//int col = rc.nextInt(col - 1);
 			walls[] = maze[row][col];
