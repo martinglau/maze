@@ -240,35 +240,36 @@ public class Maze
 		while (d.count() > 1) //when d.count = 1, maze is connected
 		{
 			int randomd = randomd.nextInt(d.size());
+			int row = (randomd/cols)-1;
 			if (randomd != 0 && randomd % cols == 0) //the right column
-			{
-				walls = maze[(randomd/cols)-1][cols-1];
-				wallBreaker(walls, d, true, false, randomd, cols);		
+			{	
+				int col = cols-1;
+				walls = maze[row][col];
+				wallBreaker(walls, d, true, false, randomd, cols, row, col);		
 			}
 			
 			else if ( randomd > (d.size() - cols))//the bottom row
 			{
-				walls = maze[(randomd/cols)-1][cols-1];
-				wallBreaker(walls, d, false, true,randomd, cols);	
+				int col =  randomd%cols;
+				walls = maze[(row][col];
+				wallBreaker(walls, d, false, true,randomd, cols, row, col);	
 			}
 			else //any cells besides the right columns and bottom row
-			{
-				walls = maze[(randomd/cols)-1][cols-1];
-				wallBreaker(walls, d, true, true,randomd, cols);
+			{	
+				int col =  randomd%cols;
+				walls = maze[row][col];
+				wallBreaker(walls, d, true, true,randomd, cols, row, col);
 				
 			}
-			walls[] = maze[row][col];
-			//Check if cells on both sides are disconnected
 		
 		}
     }
     
-    public void wallBreaker(int[] A, DisjoinSets d, boolean breakbottom, boolean breakright, int rand, int cols)
+    public void wallBreaker(int[] A, DisjoinSets d, boolean breakbottom, boolean breakright, int rand, int cols, int row, int col)
     {
     	if (breakbottom && ! breakright && d.find(rand) != d.find(rand + cols)) //right column
 		{
-			walls[1] = 0;
-			//setBot()
+			setBot(row, col, false);
 			d.union(rand, rand + cols);
 
 		}
@@ -276,11 +277,11 @@ public class Maze
 		else if (breakright && walls[0] == 1 && d.find(rand) != d.find(rand + 1))//bottom row
 		{
 
-			walls[0] = 0;
+			setRight(row, col, false);
 			d.union(rand, rand + 1);
 			if (breakbottom && d.find(rand + 1) != d.find(rand + cols))//everything else
 			{
-				walls[1] = 0;
+				setBot(row, col, false);
 				d.union(rand, rand + cols);
 			}
 			
@@ -288,7 +289,6 @@ public class Maze
 		}
 		
     }
-		//return walls;
     }
 	
     /**
