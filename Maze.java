@@ -217,13 +217,16 @@ public class Maze
 		title = String.format("rand(%dx%d)", rows, cols);
         this.rows = rows;
         this.cols = cols;
-		int[][][] maze = new int[rows][cols][2];
+		int[][][] maze = new int[rows][cols][3];
+		int count = 0;
 		for (int r = 0; r < rows; r++)
 		{
 			for(int c = 0; c < cols; c++)
 			{
 				maze[r][c][0] = 1;
 				maze[r][c][1] = 1;
+				maze[r][c][2] = count;
+				count++;
 				if (r == rows - 1 && c == cols - 1)
 					{
 						maze[r][c][0] = 0;
