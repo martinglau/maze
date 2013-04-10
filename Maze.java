@@ -217,7 +217,7 @@ public class Maze
 		title = String.format("rand(%dx%d)", rows, cols);
         this.rows = rows;
         this.cols = cols;
-		int[][][] maze = new int[rows][cols][2];
+		int[][][] maze = new int[rows][cols][3];
 		for (int r = 0; r < rows; r++)
 		{
 			for(int c = 0; c < cols; c++)
@@ -240,58 +240,55 @@ public class Maze
 		while (d.count() > 1) //when d.count = 1, maze is connected
 		{
 			int randomd = randomd.nextInt(d.size());
-			if (randomd != 0 && randomd % cols == 0) //the right columns 
+			if (randomd != 0 && randomd % cols == 0) //the right column
 			{
 				walls = maze[(randomd/cols)-1][cols-1];
-				wallBreaker(walls, true, false);
-				d.union(randomd, randomd + cols);
-				
+				wallBreaker(walls, d, true, false, randomd, cols);		
 			}
 			
-			else if (randomd < (d.size() - cols) && randomd % cols != 0) //any cells besides the right columns and bottom row
+			else if ( randomd > (d.size() - cols))//the bottom row
 			{
 				walls = maze[(randomd/cols)-1][cols-1];
+				wallBreaker(walls, d, false, true,randomd, cols);	
+			}
+			else //any cells besides the right columns and bottom row
+			{
+				walls = maze[(randomd/cols)-1][cols-1];
+				wallBreaker(walls, d, true, true,randomd, cols);
 				
 			}
 			walls[] = maze[row][col];
 			//Check if cells on both sides are disconnected
-			if walls[0] = 0
-				d.union((row*col), (row*(col+1)));
-			if walls[1] = 0
-				d.union((row*col), ((row + 1) * col);
+		
 		}
     }
     
     public void wallBreaker(int[] A, DisjoinSets d, boolean breakbottom, boolean breakright, int rand, int cols)
     {
-    	if (breakbottom && ! breakright && wallsr[1] == 1 && d.find(rand) != d.find(rand + cols))
+    	if (breakbottom && ! breakright && d.find(rand) != d.find(rand + cols)) //right column
 		{
-			walls[1] =0;
+			walls[1] = 0;
+			//setBot()
 			d.union(rand, rand + cols);
-			if (breakright)
+
 		}
 		
-		else if (breakright && walls[0] == 1 && d.find(rand) != d.find(rand + 1))
+		else if (breakright && walls[0] == 1 && d.find(rand) != d.find(rand + 1))//bottom row
 		{
 
 			walls[0] = 0;
 			d.union(rand, rand + 1);
-			if (breakbottom && d.find(rand + 1) != d.find(rand + cols))
+			if (breakbottom && d.find(rand + 1) != d.find(rand + cols))//everything else
 			{
 				walls[1] = 0;
-				d.union(rand, rand+ cols);
+				d.union(rand, rand + cols);
 			}
 			
 			
 		}
 		
-		else if(walls[0] == 1 & walls[1] == 1 && d.find(rand) != d.find(rand + 1)
-		{
-			walls[0] = 0;
-			
-			walls[1] = 0;
-			
-		}
+    }
+		//return walls;
     }
 	
     /**
