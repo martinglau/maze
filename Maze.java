@@ -82,18 +82,18 @@ public class Maze
     {	
     	int[] walls = new int[2];
     	try
-            {
-                walls = maze[row][col];
-            }
+        {
+        	walls = maze[row][col];
+        }
         catch (IndexOutOfBoundsException e)
-            {
-                System.err.print("Error: row or column was out of bounds.");
-                return false;
-            }
+        {
+        	System.err.print("Error: row or column was out of bounds.");
+            return false;
+        }
             
         if (walls[0] == 1)
-		return true;
-	return false;
+			return true;
+	    return false;
     }
 
     /**
@@ -143,13 +143,13 @@ public class Maze
     {
 		int[] walls = new int[2];
     	try
-            {
-                walls = maze[row][col];
-            }
+        {
+        	walls = maze[row][col];
+        }
         catch (IndexOutOfBoundsException e)
-            {
-                System.err.print("Error: row or column was out of bounds.");
-            }
+        {
+            System.err.print("Error: row or column was out of bounds.");
+        }
         if (b)
         	walls[0] = 1;
         else
@@ -214,36 +214,39 @@ public class Maze
      */
     public Maze(int rows, int cols)
     {
-	title = String.format("rand(%dx%d)", rows, cols);
+		title = String.format("rand(%dx%d)", rows, cols);
         this.rows = rows;
         this.cols = cols;
-	int[][][] maze = new int[rows][cols][2];
+		int[][][] maze = new int[rows][cols][2];
 		for (int r = 0; r < rows; r++)
-			{
-				for(int c = 0; c < cols; c++)
-				{
-					maze[r][c][0] = 1;
-					maze[r][c][1] = 1;
-					if (r == rows - 1 && c == cols - 1)
-						{
-							maze[r][c][0] = 0;
-						}
-					
-						
-				}
-			}			
-	//This is where we need to write the code that generates the random maze via walls
-	//It would working by getRight & getBot then based on those results, it would setRight/setBot
-	Disjoinsets d = new Disjoinsets[(rows - 1) * (cols - 1)]; //specific row * col refers to its singleton
-	Random rr = new Random();
-	Random rc = new Random();
-	int[] walls = new int[2];
-	int[] wallsr = new int[2];
-	int[] wallsb = new int[2];
-	while (d.count() > 1) //when d.count = 1, maze is connected
 		{
-			int row = rr.nextInt(rows - 1);
-			int col = rc.nextInt(col - 1);
+			for(int c = 0; c < cols; c++)
+			{
+				maze[r][c][0] = 1;
+				maze[r][c][1] = 1;
+				if (r == rows - 1 && c == cols - 1)
+					{
+						maze[r][c][0] = 0;
+					}
+					
+			}
+		}			
+		//This is where we need to write the code that generates the random maze via walls
+		//It would working by getRight & getBot then based on those results, it would setRight/setBot
+		Disjoinsets d = new Disjoinsets[rows * cols - 1]; //specific row * col refers to its singleton
+		Random randomd = new Random();
+		//Random rc = new Random();
+		int[] walls = new int[2];
+		int[] wallsr = new int[2];
+		int[] wallsb = new int[2];
+		while (d.count() > 1) //when d.count = 1, maze is connected
+		{
+			int randomd = randomd.nextInt(d.size());
+			if (randomd % cols == 0)
+			{
+				maze[randomd/cols][cols]
+			}
+			//int col = rc.nextInt(col - 1);
 			walls[] = maze[row][col];
 			wallsr[] = maze[row][col + 1];
 			wallsb[] = maze[row + 1][col];
