@@ -236,7 +236,7 @@ public class Maze
 		}			
 		//This is where we need to write the code that generates the random maze via walls
 		//It would working by getRight & getBot then based on those results, it would setRight/setBot
-		Disjoinsets d = new Disjoinsets[rows * cols +1]; //specific row * col refers to its singleton
+		DisjoinSets d = new DisjoinSets[rows * cols +1]; //specific row * col refers to its singleton
 		d.union(0,1);
 		Random randomd = new Random();
 		//Random rc = new Random();
@@ -248,7 +248,16 @@ public class Maze
 			int randomd = randomd.nextInt(d.size());
 			if (randomd != 0 && randomd % cols == 0) //the right columns 
 			{
-				maze[(randomd/cols)-1][cols-1]
+				walls = maze[(randomd/cols)-1][cols-1];
+				wallBreaker(walls, true, false);
+				d.union(randomd, randomd + cols);
+				
+			}
+			
+			else if (randomd < (d.size() - cols) && randomd % cols != 0) //any cells besides the right columns and bottom row
+			{
+				walls = maze[(randomd/cols)-1][cols-1];
+				
 			}
 			//int col = rc.nextInt(col - 1);
 			walls[] = maze[row][col];
@@ -262,6 +271,38 @@ public class Maze
 		}
     }
     
+    public void wallBreaker(int[] A, DisjoinSets d, boolean breakbottom, boolean breakright, int rand, int cols)
+    {
+    	if (breakbottom && ! breakright && wallsr[1] == 1 && d.find(rand) != d.find(rand + cols))
+		{
+			walls[1] =0;
+			d.union(rand, rand + cols);
+			if (breakright)
+		}
+		
+		else if (breakright && walls[0] == 1 && d.find(rand) != d.find(rand + 1))
+		{
+
+			walls[0] = 0;
+			d.union(rand, rand + 1);
+			if (breakbottom && d.find(rand + 1) != d.find(rand + cols))
+			{
+				walls[1] = 0;
+				d.union(rand, rand+ cols);
+			}
+			
+			
+		}
+		
+		else if(walls[0] == 1 & walls[1] == 1 && d.find(rand) != d.find(rand + 1)
+		{
+			walls[0] = 0;
+			
+			walls[1] = 0;
+			
+		}
+		//return walls;
+    }
 	
     /**
      * Creates a maze object from a file.
