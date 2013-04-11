@@ -141,7 +141,7 @@ public class Maze
      */
     public void setRight(int row, int col, boolean b) throws IndexOutOfBoundsException
     {
-	int[] walls = new int[2];
+		int[] walls = new int[2];
     	try
         {
         	walls = maze[row][col];
@@ -217,7 +217,7 @@ public class Maze
 		title = String.format("rand(%dx%d)", rows, cols);
         this.rows = rows;
         this.cols = cols;
-		int[][][] maze = new int[rows][cols][3];
+		int[][][] maze = new int[rows][cols][3]; //-1?
 		for (int r = 0; r < rows; r++)
 		{
 			for(int c = 0; c < cols; c++)
@@ -233,13 +233,13 @@ public class Maze
 		}			
 		//This is where we need to write the code that generates the random maze via walls
 		//It would working by getRight & getBot then based on those results, it would setRight/setBot
-		DisjoinSets d = new DisjoinSets[rows * cols +1]; //specific row * col refers to its singleton
+		DisjointSets d = new DisjointSets(rows * cols +1); //specific row * col refers to its singleton
 		d.union(0,1);
-		Random randomd = new Random();
+		Random random = new Random();
 		int[] walls = new int[2];
 		while (d.count() > 1) //when d.count = 1, maze is connected
 		{
-			int randomd = randomd.nextInt(d.size());
+			int randomd = random.nextInt(d.size());
 			int row = (randomd/cols)-1;
 			if (randomd != 0 && randomd % cols == 0) //the right column
 			{	
@@ -251,7 +251,7 @@ public class Maze
 			else if ( randomd > (d.size() - cols))//the bottom row
 			{
 				int col =  randomd%cols;
-				walls = maze[(row][col];
+				walls = maze[row][col];
 				wallBreaker(walls, d, false, true,randomd, cols, row, col);	
 			}
 			else //any cells besides the right columns and bottom row
@@ -265,7 +265,7 @@ public class Maze
 		}
     }
     
-    public void wallBreaker(int[] A, DisjoinSets d, boolean breakbottom, boolean breakright, int rand, int cols, int row, int col)
+    public void wallBreaker(int[] walls, DisjointSets d, boolean breakbottom, boolean breakright, int rand, int cols, int row, int col)
     {
     	if (breakbottom && ! breakright && d.find(rand) != d.find(rand + cols)) //right column
 		{
@@ -289,7 +289,7 @@ public class Maze
 		}
 		
     }
-    }
+    
 	
     /**
      * Creates a maze object from a file.
